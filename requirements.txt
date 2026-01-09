@@ -1,0 +1,10 @@
+gymnasium
+shimmy>=0.2.1
+pandas
+numpy
+yfinance
+matplotlib
+stable-baselines3[extra]
+torch
+scikit-learn
+ta
