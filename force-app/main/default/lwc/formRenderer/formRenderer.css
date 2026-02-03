@@ -1,0 +1,118 @@
+/* Form Renderer Styles */
+
+/* Form Fields Container */
+.form-fields {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Section Header */
+.section-header {
+    border-radius: 0.25rem;
+    background: linear-gradient(90deg, var(--lwc-colorBrand, #0070d2) 4px, var(--lwc-colorBackgroundAlt, #f3f3f3) 4px);
+    margin-bottom: 1rem;
+}
+
+.section-header h3 {
+    color: var(--lwc-colorTextDefault, #080707);
+    margin: 0;
+}
+
+/* Help Text Block */
+.help-text-block {
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: flex-start;
+    background-color: var(--lwc-colorBackgroundInfo, #f4f6fe);
+    border-left: 4px solid var(--lwc-colorBorderInfo, #0070d2);
+}
+
+/* Form Element Help Text */
+.slds-form-element__help {
+    font-size: 0.75rem;
+    color: var(--lwc-colorTextWeak, #706e6b);
+    margin-top: 0.25rem;
+}
+
+/* Success Message */
+.success-message {
+    padding: 3rem;
+}
+
+.success-message lightning-icon {
+    --slds-c-icon-color-foreground: var(--lwc-colorTextSuccess, #2e844a);
+}
+
+/* Error Box */
+.slds-theme_error {
+    display: flex;
+    align-items: center;
+}
+
+/* Preview Mode Notice */
+.slds-theme_shade {
+    background-color: var(--lwc-colorBackgroundAlt, #f3f3f3);
+    border-radius: 0.25rem;
+}
+
+/* Field Spacing */
+lightning-input,
+lightning-textarea,
+lightning-combobox,
+lightning-radio-group,
+lightning-dual-listbox {
+    margin-bottom: 0.5rem;
+}
+
+/* Required Field Indicator */
+.slds-required {
+    color: var(--lwc-colorTextError, #c23934);
+}
+
+/* Button Container */
+.slds-clearfix {
+    padding-top: 1rem;
+    border-top: 1px solid var(--lwc-colorBorder, #dddbda);
+}
+
+/* Loading Spinner */
+lightning-spinner {
+    position: relative;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form-fields {
+        padding: 0 0.5rem;
+    }
+    
+    .success-message {
+        padding: 1.5rem;
+    }
+}
+
+/* Animation for success message */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-message {
+    animation: fadeInUp 0.5s ease;
+}
+
+/* Dual Listbox Styling */
+lightning-dual-listbox {
+    --slds-c-dual-listbox-list-sizing-min-height: 150px;
+}
+
+/* File Input Styling */
+lightning-input[type="file"] {
+    --slds-c-input-spacing-vertical: 0.5rem;
+}

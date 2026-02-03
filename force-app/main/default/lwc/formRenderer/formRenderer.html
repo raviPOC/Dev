@@ -1,0 +1,317 @@
+<template>
+    <lightning-card title={formTitle} icon-name="custom:custom18">
+        <template if:true={formDescription}>
+            <p slot="actions" class="slds-text-body_regular slds-text-color_weak">
+                {formDescription}
+            </p>
+        </template>
+
+        <div class="slds-p-around_medium">
+            <!-- Loading State -->
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-p-around_large">
+                    <lightning-spinner alternative-text="Loading form..."></lightning-spinner>
+                </div>
+            </template>
+
+            <!-- Error State -->
+            <template if:true={errorMessage}>
+                <div class="slds-box slds-theme_error slds-p-around_medium">
+                    <lightning-icon icon-name="utility:error" size="small" class="slds-m-right_small"></lightning-icon>
+                    {errorMessage}
+                </div>
+            </template>
+
+            <!-- Form Fields -->
+            <template if:false={isLoading}>
+                <template if:false={errorMessage}>
+                    <template if:false={isSubmitted}>
+                        <div class="form-fields">
+                            <template for:each={renderedFields} for:item="field">
+                                <div key={field.id} class="slds-m-bottom_medium">
+                                    
+                                    <!-- Section Header -->
+                                    <template if:true={field.isSection}>
+                                        <div class="section-header slds-p-around_small slds-theme_shade slds-m-top_medium">
+                                            <h3 class="slds-text-heading_small">{field.label}</h3>
+                                            <template if:true={field.helpText}>
+                                                <p class="slds-text-body_small slds-m-top_xx-small">{field.helpText}</p>
+                                            </template>
+                                        </div>
+                                    </template>
+
+                                    <!-- Help Text Block -->
+                                    <template if:true={field.isHelpText}>
+                                        <div class="help-text-block slds-box slds-theme_info slds-p-around_small">
+                                            <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                            {field.helpText}
+                                        </div>
+                                    </template>
+
+                                    <!-- Text Input -->
+                                    <template if:true={field.isText}>
+                                        <lightning-input 
+                                            type="text"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Email Input -->
+                                    <template if:true={field.isEmail}>
+                                        <lightning-input 
+                                            type="email"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Phone Input -->
+                                    <template if:true={field.isPhone}>
+                                        <lightning-input 
+                                            type="tel"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            required={field.required}
+                                            pattern="[0-9\-\+\(\)\s]*"
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Number Input -->
+                                    <template if:true={field.isNumber}>
+                                        <lightning-input 
+                                            type="number"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Date Input -->
+                                    <template if:true={field.isDate}>
+                                        <lightning-input 
+                                            type="date"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- DateTime Input -->
+                                    <template if:true={field.isDateTime}>
+                                        <lightning-input 
+                                            type="datetime"
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                            <template if:true={field.helpText}>
+                                                <div slot="help">{field.helpText}</div>
+                                            </template>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Textarea -->
+                                    <template if:true={field.isTextarea}>
+                                        <lightning-textarea 
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                        </lightning-textarea>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+
+                                    <!-- Checkbox -->
+                                    <template if:true={field.isCheckbox}>
+                                        <lightning-input 
+                                            type="checkbox"
+                                            label={field.label}
+                                            name={field.id}
+                                            checked={field.value}
+                                            data-field-id={field.id}
+                                            onchange={handleCheckboxChange}
+                                            disabled={previewMode}>
+                                        </lightning-input>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+
+                                    <!-- Picklist / Combobox -->
+                                    <template if:true={field.isPicklist}>
+                                        <lightning-combobox
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            placeholder={field.placeholder}
+                                            options={field.options}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                        </lightning-combobox>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+
+                                    <!-- Radio Group -->
+                                    <template if:true={field.isRadio}>
+                                        <lightning-radio-group
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            options={field.options}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFieldChange}
+                                            disabled={previewMode}>
+                                        </lightning-radio-group>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+
+                                    <!-- Multi-Select Picklist -->
+                                    <template if:true={field.isMultiPicklist}>
+                                        <lightning-dual-listbox
+                                            label={field.label}
+                                            name={field.id}
+                                            value={field.value}
+                                            source-label="Available"
+                                            selected-label="Selected"
+                                            options={field.options}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleMultiSelectChange}
+                                            disabled={previewMode}>
+                                        </lightning-dual-listbox>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+
+                                    <!-- File Upload -->
+                                    <template if:true={field.isFile}>
+                                        <lightning-input 
+                                            type="file"
+                                            label={field.label}
+                                            name={field.id}
+                                            required={field.required}
+                                            data-field-id={field.id}
+                                            onchange={handleFileChange}
+                                            disabled={previewMode}>
+                                        </lightning-input>
+                                        <template if:true={field.helpText}>
+                                            <div class="slds-form-element__help">{field.helpText}</div>
+                                        </template>
+                                    </template>
+                                </div>
+                            </template>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <template if:false={previewMode}>
+                            <div class="slds-m-top_large slds-clearfix">
+                                <div class="slds-float_right">
+                                    <lightning-button 
+                                        label="Reset" 
+                                        onclick={handleReset}
+                                        class="slds-m-right_small">
+                                    </lightning-button>
+                                    <lightning-button 
+                                        label="Submit" 
+                                        variant="brand"
+                                        onclick={handleSubmit}
+                                        disabled={isSubmitting}>
+                                    </lightning-button>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Preview Mode Notice -->
+                        <template if:true={previewMode}>
+                            <div class="slds-box slds-theme_shade slds-m-top_medium slds-text-align_center">
+                                <lightning-icon icon-name="utility:preview" size="small" class="slds-m-right_small"></lightning-icon>
+                                Preview Mode - Form submission is disabled
+                            </div>
+                        </template>
+                    </template>
+
+                    <!-- Success Message -->
+                    <template if:true={isSubmitted}>
+                        <div class="success-message slds-text-align_center slds-p-around_large">
+                            <lightning-icon 
+                                icon-name="action:approval" 
+                                size="large"
+                                class="slds-m-bottom_medium">
+                            </lightning-icon>
+                            <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                                Thank You!
+                            </h2>
+                            <p class="slds-text-body_regular slds-text-color_weak slds-m-bottom_medium">
+                                {successMessage}
+                            </p>
+                            <lightning-button 
+                                label="Submit Another Response" 
+                                variant="brand"
+                                onclick={handleSubmitAnother}>
+                            </lightning-button>
+                        </div>
+                    </template>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+</template>

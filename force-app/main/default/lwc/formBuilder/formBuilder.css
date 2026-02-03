@@ -1,0 +1,218 @@
+/* Form Builder Styles */
+
+/* Element Palette */
+.element-palette {
+    background-color: var(--lwc-colorBackgroundAlt, #f3f3f3);
+    border-radius: 0.25rem;
+    min-height: 400px;
+}
+
+.draggable-element {
+    cursor: grab;
+    background-color: white;
+    border: 1px solid var(--lwc-colorBorder, #dddbda);
+    border-radius: 0.25rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.draggable-element:hover {
+    border-color: var(--lwc-colorBrand, #0070d2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.draggable-element:active {
+    cursor: grabbing;
+}
+
+.element-category h4 {
+    color: var(--lwc-colorTextWeak, #706e6b);
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+}
+
+/* Form Canvas */
+.form-canvas {
+    min-height: 500px;
+    background-color: white;
+    border: 2px dashed var(--lwc-colorBorder, #dddbda);
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.form-canvas.drag-over {
+    border-color: var(--lwc-colorBrand, #0070d2);
+    background-color: var(--lwc-colorBackgroundHighlight, #f4f6fe);
+}
+
+.form-canvas.empty-canvas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-canvas-message {
+    color: var(--lwc-colorTextWeak, #706e6b);
+}
+
+/* Form Field */
+.form-field {
+    position: relative;
+    cursor: move;
+    background-color: white;
+    border: 1px solid var(--lwc-colorBorder, #dddbda);
+    transition: all 0.2s ease;
+}
+
+.form-field:hover {
+    border-color: var(--lwc-colorBrand, #0070d2);
+}
+
+.form-field.selected {
+    border-color: var(--lwc-colorBrand, #0070d2);
+    box-shadow: 0 0 0 2px var(--lwc-colorBrandLight, rgba(0, 112, 210, 0.2));
+}
+
+.form-field:hover .field-actions {
+    opacity: 1;
+}
+
+/* Field Actions */
+.field-actions {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    display: flex;
+    gap: 0.25rem;
+    z-index: 10;
+}
+
+/* Field Info */
+.field-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.badge-mapped {
+    --sds-c-badge-color-background: var(--lwc-colorBackgroundSuccess, #2e844a);
+    --sds-c-badge-text-color: white;
+}
+
+/* Properties Panel */
+.properties-panel {
+    background-color: var(--lwc-colorBackgroundAlt, #f3f3f3);
+    border-radius: 0.25rem;
+    min-height: 400px;
+}
+
+.property-form {
+    padding: 0.5rem;
+}
+
+/* Section Header */
+.section-header {
+    border-radius: 0.25rem;
+    background: linear-gradient(90deg, var(--lwc-colorBrand, #0070d2) 4px, var(--lwc-colorBackgroundAlt, #f3f3f3) 4px);
+}
+
+.section-header h4 {
+    color: var(--lwc-colorTextDefault, #080707);
+}
+
+/* Help Text */
+.help-text {
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+/* Modal Styles */
+.slds-modal__container {
+    max-width: 60rem;
+}
+
+.slds-modal_large .slds-modal__container {
+    max-width: 80rem;
+    width: 90%;
+}
+
+/* Form Canvas Header */
+.form-canvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .element-palette,
+    .properties-panel {
+        min-height: auto;
+    }
+    
+    .form-canvas {
+        min-height: 300px;
+    }
+}
+
+/* Drag ghost styling */
+.dragging {
+    opacity: 0.5;
+}
+
+/* Animation for new fields */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-field {
+    animation: fadeIn 0.3s ease;
+}
+
+/* Loading overlay */
+lightning-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+/* Tooltip styles */
+[title] {
+    position: relative;
+}
+
+/* Button group spacing */
+lightning-button-group {
+    display: flex;
+    gap: 0.25rem;
+}
+
+/* Accordion styling */
+lightning-accordion {
+    --slds-c-accordion-section-content-spacing-block-start: 0.5rem;
+}
+
+/* Combobox in properties */
+.properties-panel lightning-combobox {
+    --slds-c-input-spacing-horizontal-start: 0.5rem;
+}
+
+/* Datatable in modal */
+lightning-datatable {
+    --slds-c-datatable-header-color-background: var(--lwc-colorBackgroundAlt, #f3f3f3);
+}

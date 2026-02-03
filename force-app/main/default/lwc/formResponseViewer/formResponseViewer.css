@@ -1,0 +1,76 @@
+/* Form Response Viewer Styles */
+
+.form-selector {
+    min-width: 250px;
+}
+
+/* Stat Cards */
+.stat-card {
+    border-radius: 0.5rem;
+    background-color: white;
+}
+
+.stat-card .slds-text-heading_large {
+    color: var(--lwc-colorBrand, #0070d2);
+    font-weight: bold;
+}
+
+/* Empty State */
+.empty-icon {
+    --slds-c-icon-color-foreground: var(--lwc-colorTextWeak, #706e6b);
+}
+
+/* Response Field List */
+.response-field {
+    border-bottom: 1px solid var(--lwc-colorBorder, #dddbda);
+    padding-bottom: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.response-field:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.response-field dt {
+    font-size: 0.625rem;
+    letter-spacing: 0.1em;
+}
+
+.response-field dd {
+    font-size: 0.875rem;
+}
+
+/* Boolean Icons */
+.slds-text-color_success {
+    --slds-c-icon-color-foreground: var(--lwc-colorTextSuccess, #2e844a);
+}
+
+.slds-text-color_error {
+    --slds-c-icon-color-foreground: var(--lwc-colorTextError, #c23934);
+}
+
+/* Target Record Link */
+.slds-theme_success {
+    background-color: var(--lwc-colorBackgroundSuccess, #2e844a);
+    color: white;
+    border-radius: 0.25rem;
+}
+
+.slds-theme_success a {
+    color: white;
+    text-decoration: underline;
+}
+
+/* Modal */
+.slds-modal_medium .slds-modal__container {
+    max-width: 50rem;
+    width: 80%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-selector {
+        min-width: 100%;
+    }
+}

@@ -1,0 +1,21 @@
+# Salesforce DX
+.sfdx/
+.sf/
+
+# Node
+node_modules/
+
+# IDE
+.idea/
+*.sublime-*
+.vscode/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test results
+test-results/
