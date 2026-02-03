@@ -1,0 +1,9 @@
+# LWC local-only
+**/__tests__/**
+**/*.local.*
+**/.vscode/**
+**/.idea/**
+
+# Node / tooling
+**/node_modules/**
+**/.DS_Store

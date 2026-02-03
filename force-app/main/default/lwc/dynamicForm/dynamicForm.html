@@ -1,0 +1,91 @@
+<template>
+    <lightning-card title={cardTitle}>
+        <div class="slds-p-around_medium">
+            <template if:true={isLoading}>
+                <lightning-spinner alternative-text="Loading"></lightning-spinner>
+            </template>
+
+            <template if:true={loadError}>
+                <div class="slds-text-color_error">{loadError}</div>
+            </template>
+
+            <template if:true={isReady}>
+                <template for:each={renderElements} for:item="el">
+                    <div key={el.id} class="slds-m-bottom_small">
+                        <template if:true={el.isText}>
+                            <lightning-input
+                                type="text"
+                                label={el.label}
+                                required={el.required}
+                                value={el.value}
+                                placeholder={el.placeholder}
+                                data-field={el.fieldApiName}
+                                onchange={handleInputChange}
+                            ></lightning-input>
+                        </template>
+
+                        <template if:true={el.isTextarea}>
+                            <lightning-textarea
+                                label={el.label}
+                                required={el.required}
+                                value={el.value}
+                                placeholder={el.placeholder}
+                                data-field={el.fieldApiName}
+                                onchange={handleInputChange}
+                            ></lightning-textarea>
+                        </template>
+
+                        <template if:true={el.isNumber}>
+                            <lightning-input
+                                type="number"
+                                label={el.label}
+                                required={el.required}
+                                value={el.value}
+                                placeholder={el.placeholder}
+                                data-field={el.fieldApiName}
+                                onchange={handleInputChange}
+                            ></lightning-input>
+                        </template>
+
+                        <template if:true={el.isDate}>
+                            <lightning-input
+                                type="date"
+                                label={el.label}
+                                required={el.required}
+                                value={el.value}
+                                data-field={el.fieldApiName}
+                                onchange={handleInputChange}
+                            ></lightning-input>
+                        </template>
+
+                        <template if:true={el.isCheckbox}>
+                            <lightning-input
+                                type="checkbox"
+                                label={el.label}
+                                checked={el.checked}
+                                required={el.required}
+                                data-field={el.fieldApiName}
+                                onchange={handleCheckboxChange}
+                            ></lightning-input>
+                        </template>
+
+                        <template if:true={el.isPicklist}>
+                            <lightning-combobox
+                                label={el.label}
+                                required={el.required}
+                                value={el.value}
+                                options={el.options}
+                                data-field={el.fieldApiName}
+                                onchange={handleInputChange}
+                            ></lightning-combobox>
+                        </template>
+                    </div>
+                </template>
+
+                <div class="slds-m-top_medium">
+                    <lightning-button variant="brand" label={submitLabel} onclick={handleSubmit}></lightning-button>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

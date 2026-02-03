@@ -1,0 +1,162 @@
+<template>
+    <lightning-card title="Form Builder">
+        <div class="slds-p-around_medium">
+            <div class="slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                    <lightning-combobox
+                        label="Load Existing Form"
+                        value={selectedFormId}
+                        options={formOptions}
+                        onchange={handleSelectForm}
+                        placeholder="Select a form"
+                    ></lightning-combobox>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                    <lightning-input
+                        label="Form Name"
+                        value={formName}
+                        onchange={handleFormNameChange}
+                        required
+                    ></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3">
+                    <lightning-input
+                        label="Target Object API Name"
+                        value={targetObjectApiName}
+                        onchange={handleTargetObjectChange}
+                        placeholder="e.g., Account or CustomObj__c"
+                        required
+                    ></lightning-input>
+                </div>
+                <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                    <lightning-input
+                        type="checkbox"
+                        label="Active"
+                        checked={isActive}
+                        onchange={handleActiveChange}
+                    ></lightning-input>
+                </div>
+            </div>
+
+            <div class="slds-m-top_medium slds-grid slds-wrap slds-gutters">
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-4">
+                    <div class="slds-text-title_bold slds-m-bottom_x-small">Palette (drag into canvas)</div>
+                    <div class="palette">
+                        <template for:each={palette} for:item="p">
+                            <div
+                                key={p.type}
+                                class="palette-item slds-box slds-box_xx-small slds-m-bottom_x-small"
+                                draggable="true"
+                                data-palettetype={p.type}
+                                ondragstart={handlePaletteDragStart}
+                            >
+                                {p.label}
+                            </div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-4">
+                    <div class="slds-text-title_bold slds-m-bottom_x-small">Canvas (drop + reorder)</div>
+                    <div class="canvas slds-box" ondragover={handleCanvasDragOver} ondrop={handleCanvasDrop}>
+                        <template if:true={hasElements}>
+                            <template for:each={elements} for:item="el" for:index="index">
+                                <div
+                                    key={el.id}
+                                    class={el.rowClass}
+                                    data-index={index}
+                                    draggable="true"
+                                    ondragstart={handleElementDragStart}
+                                    ondragover={handleElementDragOver}
+                                    ondrop={handleElementDrop}
+                                    onclick={handleSelectElement}
+                                >
+                                    <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                                        <div class="slds-truncate">
+                                            <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
+                                            <span class="slds-m-left_x-small">{el.label}</span>
+                                            <span class="slds-text-color_weak slds-m-left_x-small">({el.type})</span>
+                                        </div>
+                                        <div>
+                                            <lightning-button-icon
+                                                icon-name="utility:delete"
+                                                variant="bare"
+                                                alternative-text="Delete"
+                                                data-index={index}
+                                                onclick={handleDeleteElement}
+                                            ></lightning-button-icon>
+                                        </div>
+                                    </div>
+                                    <div class="slds-text-body_small slds-text-color_weak slds-truncate">
+                                        Field: {el.fieldApiName} • Required: {el.required}
+                                    </div>
+                                </div>
+                            </template>
+                        </template>
+                        <template if:false={hasElements}>
+                            <div class="slds-text-color_weak">Drag items from the palette into this area.</div>
+                        </template>
+                    </div>
+                </div>
+
+                <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-4">
+                    <div class="slds-text-title_bold slds-m-bottom_x-small">Properties</div>
+                    <template if:true={selectedElement}>
+                        <lightning-input
+                            label="Label"
+                            value={selectedElement.label}
+                            data-prop="label"
+                            onchange={handleElementPropChange}
+                        ></lightning-input>
+                        <lightning-input
+                            label="Field API Name"
+                            value={selectedElement.fieldApiName}
+                            data-prop="fieldApiName"
+                            onchange={handleElementPropChange}
+                            placeholder="e.g., Name or Custom_Field__c"
+                        ></lightning-input>
+                        <lightning-input
+                            type="checkbox"
+                            label="Required"
+                            checked={selectedElement.required}
+                            data-prop="required"
+                            onchange={handleElementPropChange}
+                        ></lightning-input>
+                        <template if:true={selectedIsTextLike}>
+                            <lightning-input
+                                label="Placeholder"
+                                value={selectedElement.placeholder}
+                                data-prop="placeholder"
+                                onchange={handleElementPropChange}
+                            ></lightning-input>
+                        </template>
+                        <template if:true={selectedIsPicklist}>
+                            <lightning-textarea
+                                label="Picklist Values (one per line)"
+                                value={selectedElement.picklistValues}
+                                data-prop="picklistValues"
+                                onchange={handleElementPropChange}
+                            ></lightning-textarea>
+                        </template>
+                    </template>
+                    <template if:false={selectedElement}>
+                        <div class="slds-text-color_weak">Click a canvas element to edit its properties.</div>
+                    </template>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-button variant="brand" label="Save Form" onclick={handleSave}></lightning-button>
+                        <lightning-button class="slds-m-left_small" label="New Form" onclick={handleNew}></lightning-button>
+                    </div>
+
+                    <div class="slds-m-top_medium">
+                        <lightning-textarea
+                            label="Definition JSON (read-only)"
+                            value={definitionJsonPretty}
+                            readonly
+                        ></lightning-textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+</template>
