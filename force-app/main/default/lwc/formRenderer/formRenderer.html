@@ -1,0 +1,238 @@
+<template>
+    <lightning-card title={formTitle} icon-name="custom:custom63">
+        <template if:false={isPreviewMode}>
+            <div slot="actions">
+                <lightning-button
+                    label="Submit"
+                    variant="brand"
+                    onclick={handleSubmit}
+                    disabled={isSubmitDisabled}>
+                </lightning-button>
+            </div>
+        </template>
+
+        <div class="slds-p-around_medium">
+            <template if:true={formDescription}>
+                <p class="slds-text-body_regular slds-m-bottom_medium">{formDescription}</p>
+            </template>
+
+            <template if:true={hasElements}>
+                <div class="form-elements">
+                    <template for:each={processedElements} for:item="element">
+                        <div key={element.id} class="slds-m-bottom_medium">
+                            
+                            <!-- Text Input -->
+                            <template if:true={element.isTextInput}>
+                                <lightning-input
+                                    type="text"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    min-length={element.minLength}
+                                    max-length={element.maxLength}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Email Input -->
+                            <template if:true={element.isEmailInput}>
+                                <lightning-input
+                                    type="email"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Number Input -->
+                            <template if:true={element.isNumberInput}>
+                                <lightning-input
+                                    type="number"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Date Input -->
+                            <template if:true={element.isDateInput}>
+                                <lightning-input
+                                    type="date"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Phone Input -->
+                            <template if:true={element.isPhoneInput}>
+                                <lightning-input
+                                    type="tel"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Textarea -->
+                            <template if:true={element.isTextarea}>
+                                <lightning-textarea
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    max-length={element.maxLength}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-textarea>
+                            </template>
+
+                            <!-- Checkbox -->
+                            <template if:true={element.isCheckbox}>
+                                <lightning-input
+                                    type="checkbox"
+                                    label={element.label}
+                                    name={element.apiName}
+                                    checked={element.checked}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleCheckboxChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input>
+                            </template>
+
+                            <!-- Picklist -->
+                            <template if:true={element.isPicklist}>
+                                <lightning-combobox
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    placeholder={element.placeholder}
+                                    options={element.options}
+                                    required={element.required}
+                                    field-level-help={element.helpText}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-combobox>
+                            </template>
+
+                            <!-- Radio Group -->
+                            <template if:true={element.isRadioGroup}>
+                                <lightning-radio-group
+                                    label={element.label}
+                                    name={element.apiName}
+                                    value={element.value}
+                                    options={element.options}
+                                    required={element.required}
+                                    onchange={handleInputChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-radio-group>
+                            </template>
+
+                            <!-- Section Header -->
+                            <template if:true={element.isSectionHeader}>
+                                <div class="slds-section slds-is-open">
+                                    <h3 class="slds-section__title slds-theme_shade">
+                                        <span class="slds-truncate slds-p-horizontal_small">{element.label}</span>
+                                    </h3>
+                                </div>
+                            </template>
+
+                            <!-- Rich Text -->
+                            <template if:true={element.isRichText}>
+                                <lightning-input-rich-text
+                                    label={element.label}
+                                    value={element.value}
+                                    onchange={handleRichTextChange}
+                                    data-id={element.id}
+                                    disabled={isPreviewMode}>
+                                </lightning-input-rich-text>
+                            </template>
+
+                            <!-- File Upload -->
+                            <template if:true={element.isFileUpload}>
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label">
+                                        <template if:true={element.required}>
+                                            <abbr class="slds-required" title="required">*</abbr>
+                                        </template>
+                                        {element.label}
+                                    </label>
+                                    <div class="slds-form-element__control">
+                                        <lightning-file-upload
+                                            label=""
+                                            name={element.apiName}
+                                            accept={acceptedFormats}
+                                            record-id={recordId}
+                                            onuploadfinished={handleUploadFinished}
+                                            data-id={element.id}
+                                            disabled={isPreviewMode}>
+                                        </lightning-file-upload>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:false={hasElements}>
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-longform">
+                        <h3 class="slds-text-heading_medium">No Form Elements</h3>
+                        <p class="slds-text-body_regular">This form has no elements configured.</p>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Success Message -->
+        <template if:true={showSuccessMessage}>
+            <div class="slds-notify slds-notify_toast slds-theme_success slds-m-around_medium" role="status">
+                <span class="slds-assistive-text">success</span>
+                <div class="slds-notify__content">
+                    <h2 class="slds-text-heading_small">Form submitted successfully!</h2>
+                </div>
+            </div>
+        </template>
+    </lightning-card>
+
+    <!-- Loading Spinner -->
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+</template>

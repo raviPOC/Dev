@@ -1,0 +1,397 @@
+<template>
+    <lightning-card title="Form Builder" icon-name="custom:custom63">
+        <div slot="actions">
+            <lightning-button-group>
+                <lightning-button 
+                    label="New Form" 
+                    onclick={handleNewForm}
+                    variant="neutral">
+                </lightning-button>
+                <lightning-button 
+                    label="Save Form" 
+                    onclick={handleSaveForm}
+                    variant="brand"
+                    disabled={isSaveDisabled}>
+                </lightning-button>
+                <lightning-button 
+                    label="Preview" 
+                    onclick={handlePreviewForm}
+                    variant="neutral"
+                    disabled={isPreviewDisabled}>
+                </lightning-button>
+            </lightning-button-group>
+        </div>
+
+        <!-- Form Name Input -->
+        <div class="slds-p-around_medium">
+            <lightning-input 
+                label="Form Name" 
+                value={formName}
+                onchange={handleFormNameChange}
+                required
+                placeholder="Enter form name">
+            </lightning-input>
+            <lightning-textarea 
+                label="Form Description" 
+                value={formDescription}
+                onchange={handleFormDescriptionChange}
+                placeholder="Enter form description"
+                class="slds-m-top_small">
+            </lightning-textarea>
+        </div>
+
+        <div class="slds-grid slds-wrap slds-p-around_medium">
+            <!-- Available Elements Panel -->
+            <div class="slds-col slds-size_1-of-4 slds-p-right_medium">
+                <div class="slds-panel slds-panel_bordered">
+                    <div class="slds-panel__header">
+                        <h2 class="slds-text-heading_small">Available Elements</h2>
+                    </div>
+                    <div class="slds-panel__body elements-panel">
+                        <template for:each={availableElements} for:item="element">
+                            <div 
+                                key={element.type}
+                                class="draggable-element slds-box slds-m-bottom_x-small"
+                                draggable="true"
+                                data-type={element.type}
+                                ondragstart={handleDragStart}>
+                                <lightning-icon 
+                                    icon-name={element.icon} 
+                                    size="x-small"
+                                    class="slds-m-right_x-small">
+                                </lightning-icon>
+                                <span>{element.label}</span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Canvas -->
+            <div class="slds-col slds-size_2-of-4 slds-p-horizontal_medium">
+                <div class="slds-panel slds-panel_bordered">
+                    <div class="slds-panel__header">
+                        <h2 class="slds-text-heading_small">Form Canvas</h2>
+                        <span class="slds-badge slds-m-left_small">{formElementCount} elements</span>
+                    </div>
+                    <div 
+                        class="slds-panel__body form-canvas"
+                        ondragover={handleDragOver}
+                        ondrop={handleDrop}
+                        ondragleave={handleDragLeave}>
+                        
+                        <template if:false={hasFormElements}>
+                            <div class="empty-canvas slds-align_absolute-center">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon 
+                                        icon-name="utility:drag_and_drop" 
+                                        size="large"
+                                        class="slds-m-bottom_small">
+                                    </lightning-icon>
+                                    <p class="slds-text-color_weak">Drag and drop elements here to build your form</p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={hasFormElements}>
+                            <template for:each={formElements} for:item="element">
+                                <div 
+                                    key={element.id}
+                                    class={element.containerClass}
+                                    data-id={element.id}
+                                    draggable="true"
+                                    ondragstart={handleCanvasElementDragStart}
+                                    ondragover={handleCanvasElementDragOver}
+                                    ondrop={handleCanvasElementDrop}>
+                                    
+                                    <div class="element-header slds-grid slds-grid_align-spread">
+                                        <span class="slds-text-title_caps">{element.typeLabel}</span>
+                                        <div>
+                                            <lightning-button-icon
+                                                icon-name="utility:edit"
+                                                variant="bare"
+                                                size="small"
+                                                onclick={handleEditElement}
+                                                data-id={element.id}
+                                                alternative-text="Edit">
+                                            </lightning-button-icon>
+                                            <lightning-button-icon
+                                                icon-name="utility:delete"
+                                                variant="bare"
+                                                size="small"
+                                                onclick={handleDeleteElement}
+                                                data-id={element.id}
+                                                alternative-text="Delete">
+                                            </lightning-button-icon>
+                                        </div>
+                                    </div>
+
+                                    <!-- Text Input Preview -->
+                                    <template if:true={element.isTextInput}>
+                                        <lightning-input 
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Email Input Preview -->
+                                    <template if:true={element.isEmailInput}>
+                                        <lightning-input 
+                                            type="email"
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Number Input Preview -->
+                                    <template if:true={element.isNumberInput}>
+                                        <lightning-input 
+                                            type="number"
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Date Input Preview -->
+                                    <template if:true={element.isDateInput}>
+                                        <lightning-input 
+                                            type="date"
+                                            label={element.label}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Phone Input Preview -->
+                                    <template if:true={element.isPhoneInput}>
+                                        <lightning-input 
+                                            type="tel"
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Textarea Preview -->
+                                    <template if:true={element.isTextarea}>
+                                        <lightning-textarea 
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-textarea>
+                                    </template>
+
+                                    <!-- Checkbox Preview -->
+                                    <template if:true={element.isCheckbox}>
+                                        <lightning-input 
+                                            type="checkbox"
+                                            label={element.label}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-input>
+                                    </template>
+
+                                    <!-- Picklist Preview -->
+                                    <template if:true={element.isPicklist}>
+                                        <lightning-combobox 
+                                            label={element.label}
+                                            placeholder={element.placeholder}
+                                            options={element.options}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-combobox>
+                                    </template>
+
+                                    <!-- Radio Group Preview -->
+                                    <template if:true={element.isRadioGroup}>
+                                        <lightning-radio-group 
+                                            label={element.label}
+                                            options={element.options}
+                                            required={element.required}
+                                            disabled>
+                                        </lightning-radio-group>
+                                    </template>
+
+                                    <!-- Section Header Preview -->
+                                    <template if:true={element.isSectionHeader}>
+                                        <h3 class="slds-text-heading_medium slds-p-top_small">{element.label}</h3>
+                                    </template>
+
+                                    <!-- Rich Text Preview -->
+                                    <template if:true={element.isRichText}>
+                                        <lightning-textarea 
+                                            label={element.label}
+                                            placeholder="Rich text content..."
+                                            disabled>
+                                        </lightning-textarea>
+                                    </template>
+
+                                    <!-- File Upload Preview -->
+                                    <template if:true={element.isFileUpload}>
+                                        <div class="slds-form-element">
+                                            <span class="slds-form-element__label">{element.label}</span>
+                                            <div class="slds-form-element__control">
+                                                <div class="slds-file-selector slds-file-selector_files">
+                                                    <div class="slds-file-selector__dropzone slds-box slds-box_x-small slds-text-align_center">
+                                                        <span class="slds-text-color_weak">File upload area</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </template>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Properties Panel -->
+            <div class="slds-col slds-size_1-of-4 slds-p-left_medium">
+                <div class="slds-panel slds-panel_bordered">
+                    <div class="slds-panel__header">
+                        <h2 class="slds-text-heading_small">Element Properties</h2>
+                    </div>
+                    <div class="slds-panel__body">
+                        <template if:false={selectedElement}>
+                            <p class="slds-text-color_weak slds-text-align_center">
+                                Select an element to edit its properties
+                            </p>
+                        </template>
+
+                        <template if:true={selectedElement}>
+                            <lightning-input 
+                                label="Field Label" 
+                                value={selectedElement.label}
+                                onchange={handlePropertyChange}
+                                data-field="label"
+                                class="slds-m-bottom_small">
+                            </lightning-input>
+
+                            <lightning-input 
+                                label="API Name" 
+                                value={selectedElement.apiName}
+                                onchange={handlePropertyChange}
+                                data-field="apiName"
+                                class="slds-m-bottom_small">
+                            </lightning-input>
+
+                            <template if:true={showPlaceholder}>
+                                <lightning-input 
+                                    label="Placeholder" 
+                                    value={selectedElement.placeholder}
+                                    onchange={handlePropertyChange}
+                                    data-field="placeholder"
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                            </template>
+
+                            <template if:true={showDefaultValue}>
+                                <lightning-input 
+                                    label="Default Value" 
+                                    value={selectedElement.defaultValue}
+                                    onchange={handlePropertyChange}
+                                    data-field="defaultValue"
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                            </template>
+
+                            <template if:true={showOptions}>
+                                <lightning-textarea 
+                                    label="Options (one per line)" 
+                                    value={selectedElement.optionsText}
+                                    onchange={handleOptionsChange}
+                                    placeholder="Option 1&#10;Option 2&#10;Option 3"
+                                    class="slds-m-bottom_small">
+                                </lightning-textarea>
+                            </template>
+
+                            <template if:true={showHelpText}>
+                                <lightning-input 
+                                    label="Help Text" 
+                                    value={selectedElement.helpText}
+                                    onchange={handlePropertyChange}
+                                    data-field="helpText"
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                            </template>
+
+                            <template if:true={showRequired}>
+                                <lightning-input 
+                                    type="checkbox"
+                                    label="Required" 
+                                    checked={selectedElement.required}
+                                    onchange={handleRequiredChange}
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                            </template>
+
+                            <template if:true={showValidation}>
+                                <lightning-input 
+                                    label="Min Length" 
+                                    type="number"
+                                    value={selectedElement.minLength}
+                                    onchange={handlePropertyChange}
+                                    data-field="minLength"
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                                <lightning-input 
+                                    label="Max Length" 
+                                    type="number"
+                                    value={selectedElement.maxLength}
+                                    onchange={handlePropertyChange}
+                                    data-field="maxLength"
+                                    class="slds-m-bottom_small">
+                                </lightning-input>
+                            </template>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </lightning-card>
+
+    <!-- Preview Modal -->
+    <template if:true={showPreviewModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="bare-inverse"
+                        class="slds-modal__close"
+                        onclick={handleClosePreview}
+                        alternative-text="Close">
+                    </lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">{formName} - Preview</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <c-form-renderer 
+                        form-definition={formDefinitionJson}
+                        preview-mode="true">
+                    </c-form-renderer>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button 
+                        label="Close" 
+                        onclick={handleClosePreview}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Loading Spinner -->
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+</template>

@@ -1,0 +1,20 @@
+/* Form Submission Viewer Styles */
+
+.submission-data {
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.slds-modal__content {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.slds-dl_horizontal__label {
+    width: 40%;
+}
+
+.slds-dl_horizontal__detail {
+    width: 60%;
+}

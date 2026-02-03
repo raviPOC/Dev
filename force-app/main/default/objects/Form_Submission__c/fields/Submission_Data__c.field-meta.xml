@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submission_Data__c</fullName>
+    <description>JSON data containing the form submission values</description>
+    <externalId>false</externalId>
+    <inlineHelpText>The submitted form data in JSON format</inlineHelpText>
+    <label>Submission Data</label>
+    <length>131072</length>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

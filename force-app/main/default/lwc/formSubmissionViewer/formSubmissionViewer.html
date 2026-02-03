@@ -1,0 +1,128 @@
+<template>
+    <lightning-card title="Form Submissions" icon-name="standard:form">
+        <div slot="actions">
+            <lightning-button 
+                label="Refresh" 
+                onclick={handleRefresh}
+                icon-name="utility:refresh">
+            </lightning-button>
+        </div>
+
+        <div class="slds-p-around_medium">
+            <!-- Form Selector -->
+            <lightning-combobox
+                label="Select Form"
+                value={selectedFormId}
+                placeholder="Select a form..."
+                options={formOptions}
+                onchange={handleFormSelect}
+                class="slds-m-bottom_medium">
+            </lightning-combobox>
+
+            <!-- Submissions Table -->
+            <template if:true={hasSubmissions}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={submissions}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    show-row-number-column
+                    hide-checkbox-column>
+                </lightning-datatable>
+            </template>
+
+            <template if:false={hasSubmissions}>
+                <template if:true={selectedFormId}>
+                    <div class="slds-illustration slds-illustration_small slds-p-vertical_large">
+                        <div class="slds-text-longform slds-text-align_center">
+                            <h3 class="slds-text-heading_medium">No Submissions Yet</h3>
+                            <p class="slds-text-body_regular">No submissions have been received for this form.</p>
+                        </div>
+                    </div>
+                </template>
+                <template if:false={selectedFormId}>
+                    <div class="slds-illustration slds-illustration_small slds-p-vertical_large">
+                        <div class="slds-text-longform slds-text-align_center">
+                            <h3 class="slds-text-heading_medium">Select a Form</h3>
+                            <p class="slds-text-body_regular">Please select a form to view its submissions.</p>
+                        </div>
+                    </div>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
+
+    <!-- Submission Detail Modal -->
+    <template if:true={showDetailModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        icon-name="utility:close"
+                        variant="bare-inverse"
+                        class="slds-modal__close"
+                        onclick={handleCloseModal}
+                        alternative-text="Close">
+                    </lightning-button-icon>
+                    <h2 class="slds-text-heading_medium">Submission Details - {selectedSubmission.Name}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                            <dl class="slds-dl_horizontal">
+                                <dt class="slds-dl_horizontal__label">
+                                    <span class="slds-truncate">Submission ID:</span>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">{selectedSubmission.Name}</dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <span class="slds-truncate">Submitted Date:</span>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">{formattedSubmittedDate}</dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <span class="slds-truncate">Status:</span>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">
+                                    <lightning-badge label={selectedSubmission.Status__c}></lightning-badge>
+                                </dd>
+                                <dt class="slds-dl_horizontal__label">
+                                    <span class="slds-truncate">Submitted By:</span>
+                                </dt>
+                                <dd class="slds-dl_horizontal__detail">{submittedByName}</dd>
+                            </dl>
+                        </div>
+                        <div class="slds-col slds-size_1-of-2 slds-p-around_small">
+                            <lightning-combobox
+                                label="Update Status"
+                                value={selectedSubmission.Status__c}
+                                options={statusOptions}
+                                onchange={handleStatusChange}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <h3 class="slds-text-heading_small slds-m-top_medium slds-m-bottom_small">Submitted Data</h3>
+                    <div class="submission-data slds-box slds-theme_shade">
+                        <template for:each={submissionDataFields} for:item="field">
+                            <div key={field.key} class="slds-m-bottom_small">
+                                <strong>{field.label}:</strong>
+                                <span class="slds-m-left_small">{field.value}</span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning-button 
+                        label="Close" 
+                        onclick={handleCloseModal}>
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+
+    <!-- Loading Spinner -->
+    <template if:true={isLoading}>
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </template>
+</template>
