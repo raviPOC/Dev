@@ -24,6 +24,8 @@ The guide covers 7 phases spanning approximately 3+ years of deliberate study an
 - Weekly study schedule templates
 - Common mistakes to avoid
 - Career paths and salary ranges in AI
+- **Detailed compensation guide** — breakdowns by role, level, company tier, geography, and career stage
+- Negotiation tips and data sources for salary research
 - How to get hired at top AI companies
 - Strategies for staying current in a fast-moving field
 

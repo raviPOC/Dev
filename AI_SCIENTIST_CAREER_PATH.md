@@ -19,7 +19,8 @@
 11. [Weekly Study Schedule Template](#11-weekly-study-schedule-template)
 12. [Common Mistakes to Avoid](#12-common-mistakes-to-avoid)
 13. [Career Paths in AI](#13-career-paths-in-ai)
-14. [How to Stay Current](#14-how-to-stay-current)
+14. [Detailed Compensation Guide](#14-detailed-compensation-guide)
+15. [How to Stay Current](#15-how-to-stay-current)
 
 ---
 
@@ -745,7 +746,198 @@ This is what makes you industry-ready (think Andrew Tulloch's expertise).
 
 ---
 
-## 14. How to Stay Current
+## 14. Detailed Compensation Guide
+
+AI is one of the highest-paying fields in technology. Below is a comprehensive breakdown of what you can expect at each career stage, by role, company tier, and geography. All figures are approximate **annual total compensation (TC)** in USD, including base salary, stock/equity, and bonuses (as of 2025-2026).
+
+### 14.1 Compensation by Role & Experience Level
+
+#### Research Scientist
+
+| Level | Years of Exp | Top-Tier Lab (OpenAI, DeepMind, Anthropic) | Big Tech (Google, Meta, Apple) | Mid-Tier / Startup |
+|-------|-------------|---------------------------------------------|-------------------------------|---------------------|
+| Junior / New Grad (PhD) | 0-2 | $300K - $450K | $250K - $400K | $150K - $300K |
+| Mid-Level | 3-5 | $400K - $700K | $350K - $600K | $200K - $400K |
+| Senior | 5-10 | $600K - $1M+ | $500K - $900K | $300K - $600K |
+| Staff / Principal | 10+ | $800K - $1.5M+ | $700K - $1.2M+ | $400K - $800K + significant equity |
+| Distinguished / VP | 15+ | $1M - $3M+ | $1M - $2.5M+ | Founder-level equity |
+
+**Breakdown for a typical Senior Research Scientist at a top lab:**
+- Base salary: $250K - $350K
+- Annual stock/RSU vesting: $200K - $500K
+- Annual bonus: $50K - $150K
+- Signing bonus (one-time): $50K - $200K
+
+#### ML Engineer
+
+| Level | Years of Exp | Top-Tier (FAANG+) | High-Growth Startup | Mid-Market Company |
+|-------|-------------|--------------------|-----------------------|---------------------|
+| Junior / New Grad | 0-2 | $180K - $280K | $120K - $220K + equity | $100K - $160K |
+| Mid-Level (L4/E4) | 2-5 | $280K - $450K | $200K - $350K + equity | $140K - $220K |
+| Senior (L5/E5) | 5-8 | $400K - $650K | $300K - $500K + equity | $180K - $300K |
+| Staff (L6/E6) | 8-12 | $550K - $900K | $400K - $700K + equity | $250K - $400K |
+| Principal (L7/E7) | 12+ | $800K - $1.3M+ | $500K - $1M + equity | $350K - $550K |
+
+**Breakdown for a typical Senior ML Engineer at FAANG:**
+- Base salary: $200K - $270K
+- Annual stock/RSU vesting: $150K - $300K
+- Annual bonus: $30K - $80K
+- Signing bonus (one-time): $30K - $100K
+
+#### AI Infrastructure / Systems Engineer
+
+| Level | Years of Exp | NVIDIA / Top AI Infra | Big Tech | Startup |
+|-------|-------------|------------------------|----------|---------|
+| Junior | 0-2 | $180K - $300K | $170K - $260K | $120K - $200K |
+| Mid-Level | 3-5 | $300K - $500K | $280K - $420K | $180K - $320K |
+| Senior | 5-10 | $450K - $750K | $400K - $650K | $250K - $500K |
+| Staff / Principal | 10+ | $700K - $1.2M+ | $600K - $1M+ | $350K - $700K + equity |
+
+**Why it pays well:** CUDA/GPU expertise, distributed systems, and compiler knowledge are extremely scarce. If you can write custom kernels and optimize training infrastructure, you are in massive demand.
+
+#### Applied AI / Data Scientist (ML-focused)
+
+| Level | Years of Exp | Big Tech | Mid-Market | Non-Tech / Traditional |
+|-------|-------------|----------|------------|------------------------|
+| Junior | 0-2 | $150K - $230K | $100K - $150K | $80K - $120K |
+| Mid-Level | 2-5 | $230K - $380K | $130K - $220K | $100K - $160K |
+| Senior | 5-8 | $350K - $550K | $200K - $320K | $140K - $220K |
+| Staff / Principal | 8+ | $500K - $800K | $280K - $450K | $200K - $320K |
+
+#### AI Product / Technical Program Manager
+
+| Level | Years of Exp | Big Tech | Growth-Stage Startup |
+|-------|-------------|----------|----------------------|
+| Mid-Level | 3-5 | $220K - $350K | $150K - $280K |
+| Senior | 5-10 | $350K - $550K | $250K - $450K |
+| Director | 10+ | $500K - $900K | $350K - $600K + equity |
+
+### 14.2 Compensation by Company (2025-2026 Estimates)
+
+#### Tier 1: AI-Native Labs (Highest Paying)
+
+| Company | Senior IC TC | Staff+ IC TC | Notes |
+|---------|-------------|--------------|-------|
+| OpenAI | $500K - $900K | $800K - $1.5M+ | Profit participation units (PPUs), high equity upside |
+| Anthropic | $450K - $800K | $700K - $1.3M+ | Significant equity grants, mission-driven |
+| DeepMind | $400K - $750K | $650K - $1.2M+ | Google-level RSUs + DeepMind premiums |
+| Scale AI | $350K - $600K | $500K - $900K | Strong equity packages |
+| Cohere | $300K - $550K | $450K - $800K | Canadian company, competitive globally |
+| Mistral AI | $250K - $500K | $400K - $700K+ | Paris-based, strong equity |
+
+#### Tier 2: Big Tech AI Teams
+
+| Company | Senior IC TC | Staff+ IC TC | Notes |
+|---------|-------------|--------------|-------|
+| Google (Brain/DeepMind) | $400K - $700K | $650K - $1.2M+ | L5-L7 levels, strong RSUs |
+| Meta (FAIR / GenAI) | $400K - $700K | $600K - $1.1M+ | E5-E7, generous RSU refreshers |
+| Apple (ML Research) | $350K - $600K | $550K - $1M+ | ICT4-ICT6, RSUs growing |
+| Microsoft (Research / AI) | $350K - $600K | $550K - $950K | L63-L67, strong bonus structure |
+| Amazon (AGI / AWS AI) | $300K - $500K | $450K - $800K | L6-L8, heavy back-loaded RSU vesting |
+| NVIDIA | $350K - $650K | $550K - $1M+ | Massive GPU demand = strong stock performance |
+
+#### Tier 3: AI Startups (High Risk, High Reward)
+
+| Stage | Cash Salary | Equity Value (if successful) | Risk Level |
+|-------|-------------|-------------------------------|------------|
+| Pre-Seed / Seed | $100K - $180K | $500K - $5M+ (on paper) | Very High |
+| Series A | $150K - $250K | $300K - $3M+ (on paper) | High |
+| Series B-C | $200K - $350K | $200K - $2M+ (on paper) | Medium-High |
+| Series D+ / Late Stage | $250K - $400K | $150K - $1M+ (more liquid) | Medium |
+
+**Key insight:** Startup equity is a bet. Early employees at Scale AI, Anthropic, or OpenAI have equity worth millions. But most startups fail. If you join a startup, make sure you believe in the mission and team.
+
+### 14.3 Compensation by Geography
+
+| Location | Multiplier (vs. SF Bay Area) | Notes |
+|----------|------------------------------|-------|
+| San Francisco / Bay Area | 1.0x (baseline) | Highest absolute pay, highest cost of living |
+| New York City | 0.90 - 1.0x | Competitive with SF for AI roles |
+| Seattle / Bellevue | 0.90 - 0.95x | No state income tax = higher take-home |
+| Los Angeles | 0.80 - 0.90x | Growing AI scene |
+| Austin / Denver / Miami | 0.75 - 0.85x | Lower cost of living, growing tech hubs |
+| Boston / Cambridge | 0.85 - 0.95x | Strong research ecosystem (MIT, Harvard) |
+| London | 0.55 - 0.70x | Top research hub but lower pay than US |
+| Toronto / Montreal | 0.50 - 0.65x | Strong AI research (Hinton, Bengio legacy), growing salaries |
+| Zurich | 0.70 - 0.85x | Google DeepMind, ETH Zurich, high local salaries |
+| Paris | 0.45 - 0.60x | Mistral, Meta FAIR, growing ecosystem |
+| Berlin / Amsterdam | 0.40 - 0.55x | Growing but still below US levels |
+| Bangalore / Hyderabad | 0.20 - 0.35x | Rapidly growing AI industry, lower cost of living |
+| Beijing / Shanghai | 0.30 - 0.50x | Strong AI industry (ByteDance, Baidu, Alibaba) |
+| Singapore | 0.50 - 0.65x | Growing AI hub, low taxes |
+| Remote (US-based company) | 0.75 - 0.95x | Increasingly common, varies by company policy |
+
+### 14.4 What Drives the Highest Compensation
+
+The people earning $500K-$1M+ share these traits:
+
+| Factor | Impact on Compensation |
+|--------|----------------------|
+| **Scarce technical skills** (CUDA, distributed training, LLM pretraining) | +30-60% premium |
+| **Top-tier publications** (NeurIPS, ICML oral/spotlight) | +20-40% premium, opens top labs |
+| **PhD from top program** (Stanford, MIT, CMU, Berkeley, etc.) | +15-30% at entry level |
+| **Prior experience at a top lab** (OpenAI, DeepMind, FAIR) | +20-50% at next role |
+| **Open-source impact** (major contributor to PyTorch, HuggingFace, etc.) | +15-30%, plus reputation |
+| **Competing offers** | +20-50% (negotiation leverage is real) |
+| **Willingness to relocate to SF/NYC** | +10-30% vs. remote/other cities |
+| **Specialization in hot area** (LLMs, agents, robotics, inference optimization) | +20-40% premium |
+
+### 14.5 Compensation Growth Over a Career
+
+Here is a realistic trajectory for someone following this guide diligently:
+
+| Career Stage | Timeline | Likely Role | Estimated TC (SF Bay Area) |
+|-------------|----------|-------------|---------------------------|
+| Learning / Student | Year 0-2 | Student / Self-study | $0 (investing in yourself) |
+| First Job / Internship | Year 2-3 | ML Intern / Junior MLE | $80K - $180K |
+| Early Career | Year 3-5 | ML Engineer / Junior Research Scientist | $180K - $350K |
+| Mid Career | Year 5-8 | Senior MLE / Research Scientist | $350K - $650K |
+| Established Expert | Year 8-12 | Staff Engineer / Senior Research Scientist | $550K - $1M+ |
+| Industry Leader | Year 12+ | Principal / Distinguished / Director | $800K - $1.5M+ |
+| Founder / Executive | Varies | CTO / CEO / VP of AI | Equity-driven, potentially $10M+ |
+
+### 14.6 Beyond Cash: Non-Monetary Compensation
+
+Top AI roles often come with significant non-cash benefits:
+
+- **GPU/Compute access**: Some labs provide personal compute budgets ($50K-$500K/year in cloud credits)
+- **Conference travel**: NeurIPS, ICML, ICLR attendance paid for ($3K-$10K/year)
+- **Education budgets**: $5K-$20K/year for courses, books, conferences
+- **Publication bonuses**: Some companies pay $5K-$20K per accepted top-venue paper
+- **Sabbaticals**: Some research labs offer 1-3 month research sabbaticals
+- **Immigration support**: H-1B, O-1A (extraordinary ability), green card sponsorship
+- **Flexible work**: Many AI roles offer remote/hybrid options
+- **Hardware**: High-end laptops, multiple monitors, home office stipends ($2K-$5K)
+- **Impact**: Working on problems that affect billions of people
+
+### 14.7 Negotiation Tips
+
+1. **Always negotiate.** The first offer is almost never the best offer. Most companies expect negotiation.
+2. **Get competing offers.** This is the single most powerful negotiation lever. Apply broadly.
+3. **Know your market rate.** Use levels.fyi, Glassdoor, Blind, and Teamblind for real data.
+4. **Negotiate equity, not just base.** At senior levels, equity is the majority of TC. Push for more RSUs/options.
+5. **Ask for signing bonus.** This is often the easiest component for companies to increase.
+6. **Consider the equity upside.** $300K at a Series A startup could be worth $3M if the company succeeds.
+7. **Don't reveal your current salary.** In many US states, it's illegal for employers to ask.
+8. **Negotiate refresh grants.** Annual equity refreshers vary enormously (ask about the refresh policy upfront).
+9. **Factor in taxes.** $500K in Seattle (no state tax) > $550K in San Francisco (13.3% state tax).
+10. **Think total lifetime earnings.** A role with better learning opportunities at slightly lower pay can yield far more over 10 years.
+
+### 14.8 Key Compensation Data Sources
+
+| Source | What It Provides | URL |
+|--------|-----------------|-----|
+| **levels.fyi** | Verified TC data by company, level, role | levels.fyi |
+| **Glassdoor** | Salary ranges, reviews | glassdoor.com |
+| **Blind / Teamblind** | Anonymous tech worker discussions, TC sharing | teamblind.com |
+| **compensation.fyi** | Startup compensation data | compensation.fyi |
+| **AI jobs boards** | ai-jobs.net, ML-focused job boards | Various |
+| **H1B Salary Database** | Public H-1B wage data (base salary only) | h1bdata.info |
+| **LinkedIn Salary** | Salary insights by role and location | linkedin.com |
+
+---
+
+## 15. How to Stay Current
 
 ### Daily (15-30 min)
 - Skim arxiv-sanity or Papers With Code for new papers
