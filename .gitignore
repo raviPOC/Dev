@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+logs/predictions.csv
+logs/performance.csv
+*.pt
+*.pkl
+*.model
+.env
